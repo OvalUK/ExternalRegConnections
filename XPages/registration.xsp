@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xp:this.beforePageLoad><![CDATA[#{javascript:var page = new com.uk.oval.registrations.ui.RegistrationPage();
+viewScope.put("page", page);
+page.beforePageLoad();}]]></xp:this.beforePageLoad>
+	<xc:ccLayout pageTitle="Set Password">
+		<xc:ccBS_Messages></xc:ccBS_Messages>
+
+		<xc:ccResetPassword firstTime="true" loaded="${page.request.isValid}"></xc:ccResetPassword>
+
+		</xc:ccLayout>
+</xp:view>

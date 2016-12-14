@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xp:this.beforePageLoad><![CDATA[#{javascript:viewScope.put("page", new com.uk.oval.registrations.ui.ConnectionsTestPage());}]]></xp:this.beforePageLoad>
+
+	<xc:ccLayout pageTitle="Connections Tests">
+		<xp:messages id="messages1"></xp:messages>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Test</th>
+					<th>Results</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Connections Admin User</td>
+					<td>
+						Secure:
+						<xp:text value="#{securesettings.connections_admin.value1}" />
+						<br />
+						Normal:
+						<xp:text value="#{settings.connections_admin.value1}" />
+					</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>Connections Admin Password</td>
+					<td>
+						<u><xp:text id="txtPassword" value="Hover"
+							title="#{securesettings.connections_admin.value2}" /></u>
+					</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>Connections URL</td>
+					<td>
+						<xp:text value="#{settings.connections_url.value1}" />
+					</td>
+					<td></td>
+				</tr>
+				<tr>
+
+					<td>Authenticated?</td>
+					<td>
+						<xp:text
+							styleClass="#{(page.conService.isAuthenticated) ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-remove'}" />
+						<xp:button rendered="#{!page.conService.isAuthenticated}"
+							value="Authenticate" id="button1">
+							<xp:eventHandler event="onclick" submit="true"
+								refreshMode="complete" action="#{page.conService.loginAsAdmin}">
+							</xp:eventHandler>
+						</xp:button>
+						<xp:button rendered="#{page.conService.isAuthenticated}"
+							value="Logout Admin" id="button2">
+							<xp:eventHandler event="onclick" submit="true"
+								refreshMode="complete" action="#{page.conService.logout}">
+							</xp:eventHandler>
+						</xp:button>
+					</td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+
+		<xc:ccCommunities rendered="#{page.conService.isAuthenticated}"></xc:ccCommunities>
+
+		<xc:ccMembers rendered="#{page.conService.isAuthenticated}"></xc:ccMembers>
+
+		<xc:ccCreateProfile></xc:ccCreateProfile>
+
+	</xc:ccLayout>
+
+</xp:view>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config>
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/custom</namespace-uri>
+    <default-prefix>xc</default-prefix>
+  </faces-config-extension>
+  <composite-component>
+    <component-type>ccRegisterPerson</component-type>
+    <composite-name>ccRegisterPerson</composite-name>
+    <composite-file>/ccRegisterPerson.xsp</composite-file>
+    <composite-extension>
+      <designer-extension>
+        <in-palette>true</in-palette>
+      </designer-extension>
+    </composite-extension>
+    <property>
+      <property-name>editablePassword</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <default-value>true</default-value>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <property-name>showCommunities</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <default-value>false</default-value>
+        </designer-extension>
+        <required>true</required>
+      </property-extension>
+    </property>
+  </composite-component>
+</faces-config>

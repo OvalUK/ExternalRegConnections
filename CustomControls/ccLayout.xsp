@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:bx="http://www.openntf.org/xsp/bootstrap" xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xp:this.resources>
+		<xp:script src="/xpCommon.jss" clientSide="false"></xp:script>
+	</xp:this.resources>
+	<xp:this.dataContexts>
+		<xp:dataContext var="isAuthenticated">
+			<xp:this.value><![CDATA[${javascript:(session.getEffectiveUserName() != "Anonymous")}]]></xp:this.value>
+		</xp:dataContext>
+	</xp:this.dataContexts>
+	<xe:applicationLayout id="applicationLayout1">
+
+		<xe:this.configuration>
+			<bx:bootstrapApplication titleBar="false"
+				navbarInverted="false" productLogoAlt="External Registrations"
+				placeBar="false" banner="true" pageWidth="fixed">
+				<bx:this.bannerApplicationLinks>
+
+					
+					<xe:pageTreeNode rendered="#{isAuthenticated}"
+						label="Requests" page="/requests.xsp">
+					</xe:pageTreeNode>
+					<xe:pageTreeNode rendered="#{isAuthenticated}"
+						label="Register User" page="/newRegistration.xsp">
+					</xe:pageTreeNode>
+					<xe:basicContainerNode label="Administration"
+						loaded="${javascript:context.getUser().getRoles().contains('[Admin]');}">
+						<xe:this.children>
+						<xe:basicLeafNode label="Settings"
+								href="/settings.xsp">
+							</xe:basicLeafNode>
+							<xe:basicLeafNode label="Connections Tests"
+								href="/testConnections.xsp">
+							</xe:basicLeafNode>
+							<xe:basicLeafNode label="Registration Tests"
+								href="/testRegistration.xsp">
+							</xe:basicLeafNode>
+						</xe:this.children>
+					</xe:basicContainerNode>
+
+				</bx:this.bannerApplicationLinks>
+				<bx:this.bannerUtilityLinks>
+					<xe:basicLeafNode rendered="#{isAuthenticated}">
+						<xe:this.label><![CDATA[${javascript:@Name("[CN]",database.getServer())}]]></xe:this.label>
+					</xe:basicLeafNode>
+
+
+					<xe:basicContainerNode rendered="#{isAuthenticated}">
+						<xe:this.label><![CDATA[#{javascript:@Name("[CN]",session.getEffectiveUserName())}]]></xe:this.label>
+
+						<xe:basicLeafNode label="Logout">
+							<xe:this.href><![CDATA[${javascript:facesContext.getExternalContext().getRequest().getContextPath() + "?Logout&redirectTo=" + facesContext.getExternalContext().getRequest().getContextPath()}]]></xe:this.href>
+						</xe:basicLeafNode>
+					</xe:basicContainerNode>
+
+				</bx:this.bannerUtilityLinks>
+			</bx:bootstrapApplication>
+		</xe:this.configuration>
+		<xp:div loaded="${compositeData.pageTitle != null}" styleClass="page-header">
+			<h1>
+				<xp:text escape="true" value="#{compositeData.pageTitle}">
+				</xp:text>
+				<xp:panel disableOutputTag="true"
+					loaded="${compositeData.pageSubTitle != null}">
+					&#160;
+					<small>
+						<xp:text escape="true" value="#{compositeData.pageSubTitle}">
+						</xp:text>
+					</small>
+				</xp:panel>
+			</h1>
+		</xp:div>
+		<xp:callback id="OneUIMainAreaCallback"></xp:callback>
+	</xe:applicationLayout>
+	<script type="text/javascript">
+		$(function () { $('.modal').on('shown.bs.modal',
+		function () {
+		$('FORM').append($('.modal-backdrop,
+		.modal-scrollable')); })
+		});
+	</script>
+
+	<xc:ccDebugToolbar
+		loaded="${settings.log_showToolbar.value1 == 'true'}"
+		defaultCollapsed="false" collapseTo="right">
+	</xc:ccDebugToolbar>
+</xp:view>

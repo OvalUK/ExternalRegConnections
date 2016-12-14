@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.data>
+		<xp:dominoView var="viewRequests" viewName="#{sessionScope.keywordView}"
+			categoryFilter="#{javascript:sessionScope.keywordCat}">
+
+		</xp:dominoView>
+	</xp:this.data>
+
+	<xp:this.beforePageLoad><![CDATA[#{javascript:var page = new com.uk.oval.registrations.ui.RequestsPage();
+viewScope.put("page", page);
+//page.beforePageLoad();
+
+//create data for keywords list
+var menuData = [
+{"title":"User Registrations",
+   "items":[{  
+      "label":"Pending User",
+      "view":"UserRegistrationsByStatus",
+      "cat":"pending-user"
+   },
+   {  
+      "label":"Pending Connections",
+      "view":"UserRegistrationsByStatus",
+      "cat":"pending-connections"
+   },
+   {  
+      "label":"Complete",
+      "view":"UserRegistrationsByStatus",
+      "cat":"complete"
+   }]
+  }
+];
+viewScope.put("menuData", menuData);
+
+//default
+if (null == sessionScope.keywordView) {
+	sessionScope.keywordView = menuData[0].items[0].view;
+	sessionScope.keywordCat = menuData[0].items[0].cat;
+	sessionScope.keywordType = menuData[0].title;
+}}]]></xp:this.beforePageLoad>
+
+	<xc:ccLayout pageTitle="Requests">
+
+
+
+		<xp:messages id="messages1"></xp:messages>
+
+		<xp:div id="pTabContent" styleClass="row">
+			<div class="col-md-4">
+
+				<xp:repeat id="repeat2" rows="30" var="menu" indexVar="i"
+					disableOutputTag="true" repeatControls="true" value="#{menuData}">
+					<h3>
+						<xp:text value="#{menu.title}" />
+					</h3>
+
+					<ul class="nav nav-pills nav-stacked">
+						<xp:repeat id="repeatTabs" rows="30" var="tab" indexVar="i"
+							disableOutputTag="true" repeatControls="true" value="#{menu.items}">
+
+
+
+							<li
+								class="#{(keywordView == tab.view and keywordCat == tab.cat) ? 'active' : null}">
+								<xp:link escape="true" id="link2">
+									<xp:text value="#{tab.label}" />
+									<xp:text styleClass="badge pull-right" escape="true"
+										id="computedField1">
+										<xp:this.value><![CDATA[#{javascript:var viewKeywords:NotesView = database.getView(tab.view);
+var count;
+if (tab.cat) {
+	var vec = viewKeywords.getAllEntriesByKey(tab.cat);
+	count = vec.getCount();
+	vec.recycle();
+} else {
+	count = viewKeywords.getEntryCount();
+}
+viewKeywords.recycle();
+return count;
+
+}]]></xp:this.value>
+										<xp:this.converter>
+											<xp:convertNumber type="number" integerOnly="true">
+											</xp:convertNumber>
+										</xp:this.converter>
+									</xp:text>
+									<xp:eventHandler event="onclick" submit="true"
+										refreshMode="partial" refreshId="pTabContent">
+										<xp:this.action>
+
+											<xp:actionGroup>
+
+
+												<xp:executeScript>
+													<xp:this.script><![CDATA[#{javascript:sessionScope.put("keywordView",tab.view);
+sessionScope.put("keywordCat",tab.cat);
+sessionScope.put("keywordType",menu.title)}]]></xp:this.script>
+												</xp:executeScript>
+											</xp:actionGroup>
+										</xp:this.action>
+									</xp:eventHandler>
+								</xp:link>
+							</li>
+
+						</xp:repeat>
+					</ul>
+				</xp:repeat>
+			</div>
+			<xp:div id="dContent" styleClass="col-md-8">
+				<xc:ccRegistrationRequests></xc:ccRegistrationRequests>
+			</xp:div>
+		</xp:div>
+	</xc:ccLayout>
+</xp:view>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<table class="table">
+		<thead>
+			<tr>
+				<th style="width:100px">Created</th>
+				<th>User</th>
+				<th>Community</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<xp:repeat disableOutputTag="true" id="repeat1" rows="30"
+				value="#{viewRequests}" var="request">
+				<tr>
+					<td>
+						<xp:text value="#{request.Created}" />
+					</td>
+					<td>
+						<xp:text value="#{request.Email}" />
+					</td>
+					<td>
+						<xp:text value="#{request.Community}" />
+					</td>
+					<td>
+						<xp:button rendered="#{request.Status == 'pending-user'}" value="Resend Email"
+							id="button1" themeId="Button.Small">
+							<xp:eventHandler event="onclick" submit="true"
+								refreshMode="complete">
+								<xp:this.action><![CDATA[#{javascript:page.resendMail(request.getDocument().getUniversalID());}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:button>
+						<xp:button rendered="#{request.Status == 'pending-connections'}" value="Add to Community"
+							id="button2" themeId="Button.Small">
+							<xp:eventHandler event="onclick" submit="true"
+								refreshMode="complete">
+								<xp:this.action><![CDATA[#{javascript:page.addUserToCommunity(request.getDocument().getUniversalID());}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:button>
+					</td>
+				</tr>
+			</xp:repeat>
+		</tbody>
+	</table>
+</xp:view>

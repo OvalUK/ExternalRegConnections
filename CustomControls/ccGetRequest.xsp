@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xp:panel id="pGetRequest" styleClass="form-horizontal"
+		style="padding: 10px">
+		<xp:this.data>
+			<xe:objectData var="request" scope="view"
+				createObject="#{javascript:new com.uk.oval.registrations.Request()}">
+			</xe:objectData>
+		</xp:this.data>
+		<xc:ccFormRow>
+			<xc:ccFormCol cols="2" label="Key">
+				<xp:inputText id="inKey" value="#{request.key}"
+					required="true">
+				</xp:inputText>
+			</xc:ccFormCol>
+		</xc:ccFormRow>
+
+		<xc:ccFormRow>
+			<xc:ccFormCol cols="2" label="Type">
+				<xp:text value="#{request.type}" />
+			</xc:ccFormCol>
+		</xc:ccFormRow>
+
+		<xc:ccFormRow>
+			<xc:ccFormCol cols="2" label="Email">
+				<xp:text value="#{request.email}" />
+			</xc:ccFormCol>
+		</xc:ccFormRow>
+
+		<div class="form-actions pull-right" style="margin:10px 0 10px 0">
+			<xp:button value="Get Request" id="button1">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="complete" execMode="partial" execId="pGetRequest">
+					<xp:this.action><![CDATA[#{javascript:page.getRequest(request);}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+		</div>
+	</xp:panel>
+	<xp:scriptBlock type="text/javascript">
+		<xp:this.value>
+			<![CDATA[
+			$( "input[aria-invalid='true']" ).closest('div.form-group').addClass('has-error');
+			$(':not(#anything)').on('click', function (e) {
+    $('.popover-link').each(function () {
+        //the 'is' for buttons that trigger popups
+        //the 'has' for icons within a button that triggers a popup
+        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+            $(this).popover('hide');
+        }
+    });
+});
+$("input[aria-required='true']").each(function() { 
+   $this = $(this);
+   $('label[for="'+ $this.attr('id') +'"]').append('<span class="mandatory"/>');
+});
+ ]]>
+		</xp:this.value>
+	</xp:scriptBlock>
+</xp:view>

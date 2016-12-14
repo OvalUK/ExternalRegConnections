@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xp:this.beforePageLoad><![CDATA[#{javascript:var body;
+var title;
+var msg = param.get("msg");
+if (msg) {
+	body = securesettings[msg].valueRT;
+	
+	//do substitutions
+	var userName = (sessionScope.userName) ? sessionScope.userName : "";
+	var url = (sessionScope.url) ? sessionScope.url : "";
+	var arg1 = (param.arg1) ? param.arg1 : "";
+	body = @ReplaceSubstring(body, "{arg1}", arg1);
+	body = @ReplaceSubstring(body, "{username}", userName);
+	body = @ReplaceSubstring(body, "{url}", url);
+	body = @ReplaceSubstring(body, "{dbHome}", "/"+ @ReplaceSubstring(@DbName()[1],"\\","/"));
+	//process markdown
+	//body = com.uk.oval.markdown.Processor.process(body);
+	title = securesettings[msg].value1;
+} else {
+	body = "Message not found";
+	title = "Error";
+}
+viewScope.body = body;
+viewScope.title = title;
+}]]></xp:this.beforePageLoad>
+	<xc:ccLayout pageTitle="${viewScope.title}">
+			<xp:text escape="false" id="computedField3" value="${viewScope.body}">
+		</xp:text>
+	</xc:ccLayout>
+</xp:view>

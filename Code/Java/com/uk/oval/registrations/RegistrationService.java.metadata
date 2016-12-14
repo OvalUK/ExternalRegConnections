@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="1.7" replicaid="80257F71005749E7" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="27a" sequence="10" unid="02F3435316BD75B380257F630035389F">
+<created><datetime>20160224T094119,03+00</datetime></created>
+<modified><datetime>20161214T161050,43+00</datetime></modified>
+<revised><datetime>20161214T161050,42+00</datetime></revised>
+<lastaccessed><datetime>20161214T161050,42+00</datetime></lastaccessed>
+<addedtofile><datetime>20160309T155327,33+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=David Mulvey/O=Oval</name></updatedby>
+<wassignedby><name>CN=David Mulvey/O=Oval</name></wassignedby>
+<item name="$Flags"><text>34567Cg~[P</text></item>
+<item name="$TITLE"><text>com/uk/oval/registrations/RegistrationService.java</text></item>
+
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+
+<item name="$FileNames" sign="true"><text>com/uk/oval/registrations/RegistrationService.java</text></item>
+
+</note>

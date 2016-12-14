@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.dataContexts>
+		<xp:dataContext var="editablePassword">
+			<xp:this.value><![CDATA[${!empty compositeData.editablePassword && compositeData.editablePassword}]]></xp:this.value>
+		</xp:dataContext>
+		<xp:dataContext var="person" value="#{page.person}"></xp:dataContext>
+	</xp:this.dataContexts>
+	<xp:panel id="pRegisterPerson">
+		<xp:panel styleClass="form-horizontal" style="padding: 10px">
+			<xc:ccBS_Messages></xc:ccBS_Messages>
+			<xc:ccFormRow>
+				<xc:ccFormCol cols="2" label="First Name">
+					<xp:inputText id="inFirstName" value="#{person.firstName}"
+						required="true">
+					</xp:inputText>
+					<xp:message id="message1" for="inFirstName" styleClass="help-block"></xp:message>
+				</xc:ccFormCol>
+			</xc:ccFormRow>
+			<xc:ccFormRow>
+				<xc:ccFormCol cols="2" label="Last Name">
+					<xp:inputText id="inLastName" value="#{person.lastName}"
+						required="true">
+					</xp:inputText>
+						<xp:message id="message2" for="inLastName" styleClass="help-block"></xp:message>
+				</xc:ccFormCol>
+			</xc:ccFormRow>
+			<xc:ccFormRow>
+				<xc:ccFormCol cols="2" label="Email">
+					<xp:inputText id="inEmail" value="#{person.email}"
+						required="true" validator="#{validators.validateEmail}">
+					</xp:inputText>
+					<xp:message id="message3" for="inEmail" styleClass="help-block"></xp:message>
+				</xc:ccFormCol>
+			</xc:ccFormRow>
+			<xc:ccFormRow rendered="#{editablePassword}">
+				<xc:ccFormCol cols="2" label="Password">
+					<xp:inputText id="inPassword" value="#{person.password}"
+						required="true" validator="#{validators.validatePassword}"
+						password="true">
+					</xp:inputText>
+					<xp:message id="message4" for="inPassword" styleClass="help-block"></xp:message>
+				</xc:ccFormCol>
+			</xc:ccFormRow>
+			<xc:ccFormRow rendered="#{editablePassword}">
+				<xc:ccFormCol cols="2" label="Confirm Password">
+					<xp:inputText id="inPasswordConfirm" value="#{person.passwordConfirm}"
+						required="true" validator="#{validators.validateCompare}"
+						password="true">
+					</xp:inputText>
+					<xp:message id="message5" for="inPasswordConfirm" styleClass="help-block"></xp:message>
+				</xc:ccFormCol>
+			</xc:ccFormRow>
+			<xc:ccFormRow>
+				<xc:ccFormCol cols="2" label="Add to community?">
+					<xp:checkBox id="checkBox1" value="#{page.addToCommunity}">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="partial" disableValidators="true" execMode="partial" execId="pRegisterPerson" refreshId="pRegisterPerson">
+						</xp:eventHandler>
+					</xp:checkBox>
+				</xc:ccFormCol>
+			</xc:ccFormRow>
+			<xc:ccFormRow rendered="#{page.addToCommunity}">
+				<xc:ccFormCol cols="2" label="Community Name">
+					<xc:ccFindCommunity></xc:ccFindCommunity>
+				</xc:ccFormCol>
+			</xc:ccFormRow>
+			<hr />
+			<div class="form-actions pull-right" style="margin:10px 0 10px 0">
+				<xp:button value="Register" id="button1">
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="complete" execMode="partial" execId="pRegisterPerson">
+						<xp:this.action><![CDATA[#{javascript:page.registerUser(person)}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+			</div>
+
+		</xp:panel>
+		<xp:scriptBlock type="text/javascript">
+			<xp:this.value>
+			<![CDATA[
+			$( "input[aria-invalid='true']" ).closest('div.form-group').addClass('has-error');
+			$(':not(#anything)').on('click', function (e) {
+    $('.popover-link').each(function () {
+        //the 'is' for buttons that trigger popups
+        //the 'has' for icons within a button that triggers a popup
+        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+            $(this).popover('hide');
+        }
+    });
+});
+$("input[aria-required='true']").each(function() { 
+   $this = $(this);
+   $('label[for="'+ $this.attr('id') +'"]').append('<span class="mandatory"/>');
+});
+ ]]>
+			</xp:this.value>
+		</xp:scriptBlock>
+	</xp:panel>
+</xp:view>

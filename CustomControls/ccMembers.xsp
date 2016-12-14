@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xe:widgetContainer id="pMemberSearch"
+		titleBarText="Member Search">
+
+		<div class="row" style="padding-top: 10px">
+			<div class="col-md-4">
+				<xp:inputText id="inMemberName" defaultValue="David"></xp:inputText>
+			</div>
+			<div class="col-md-8">
+				<xp:button value="Search Members" id="btnFindMembers">
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="complete" execMode="partial" execId="pMemberSearch">
+						<xp:this.action><![CDATA[#{javascript:var name = getComponent("inMemberName").getValue();
+if (name != "") {
+viewScope.membersResult = page.conService.findMembersByName(name);
+}}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+				<xp:button value="Refresh" id="button2">
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="complete" execMode="partial" execId="pMemberSearch">
+					</xp:eventHandler>
+				</xp:button>
+			</div>
+		</div>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>GUID</th>
+				</tr>
+			</thead>
+			<tbody>
+				<xp:repeat id="repeat1" rows="30" value="#{membersResult}"
+					var="member">
+					<tr>
+						<td>
+							<xp:text value="#{member.name}" />
+						</td>
+						<td>
+							<xp:text value="#{member.userid}" />
+						</td>
+						<td>
+							<xp:button value="Add to Community" id="button1"
+								disabled="#{javascript:!viewScope.selectedCommunity}">
+								<xp:eventHandler event="onclick" submit="true"
+									refreshMode="complete">
+									<xp:this.action><![CDATA[#{javascript:page.conService.addMemberToCommunity(viewScope.selectedCommunity, member.getUserid());}]]></xp:this.action>
+								</xp:eventHandler>
+							</xp:button>
+							<xp:button value="Invite to Community" id="button3"
+								disabled="#{javascript:!viewScope.selectedCommunity}">
+								<xp:eventHandler event="onclick" submit="true"
+									refreshMode="complete">
+									<xp:this.action><![CDATA[#{javascript:page.conService.addMemberToCommunity(viewScope.selectedCommunity, member.getUserid(), true);}]]></xp:this.action>
+								</xp:eventHandler>
+							</xp:button>
+							<small>
+								<xp:text value="#{viewScope.selectedCommunity}" />
+							</small>
+						</td>
+					</tr>
+				</xp:repeat>
+			</tbody>
+		</table>
+
+	</xe:widgetContainer>
+
+
+</xp:view>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xp:this.beforePageLoad><![CDATA[#{javascript:viewScope.put("page", new com.uk.oval.registrations.ui.NewRegistration());}]]></xp:this.beforePageLoad>
+	<xc:ccLayout pageTitle="Register External User">
+		<div class="row">
+			<div class="col-sm-12 col-md-10">
+				<xc:ccRegisterPerson showCommunities="true"
+					editablePassword="false"></xc:ccRegisterPerson>
+			</div>
+		</div>
+	</xc:ccLayout>
+</xp:view>

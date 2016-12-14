@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xe:widgetContainer id="pCreateProfile"
+		titleBarText="Create Profile">
+		<xp:panel styleClass="form-horizontal"
+			style="padding: 10px">
+			<xp:this.dataContexts>
+				<xp:dataContext var="person" value="#{page.person}"></xp:dataContext>
+			</xp:this.dataContexts>
+			<xc:ccFormRow>
+				<xc:ccFormCol cols="4" label="Email address">
+					<xp:inputText id="inFirstName"
+						value="#{person.email}" required="true">
+					</xp:inputText>
+				</xc:ccFormCol>
+			</xc:ccFormRow>
+
+			<div class="form-actions pull-right"
+				style="margin:10px 0 10px 0">
+				<xp:button value="Create Profile"
+					id="button1">
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="complete" execMode="partial"
+						execId="pCreateProfile">
+						<xp:this.action><![CDATA[#{javascript:page.registerInConnections()}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+			</div>
+		</xp:panel>
+		<xp:scriptBlock type="text/javascript">
+			<xp:this.value>
+			<![CDATA[
+			$( "input[aria-invalid='true']" ).closest('div.form-group').addClass('has-error');
+			$(':not(#anything)').on('click', function (e) {
+    $('.popover-link').each(function () {
+        //the 'is' for buttons that trigger popups
+        //the 'has' for icons within a button that triggers a popup
+        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+            $(this).popover('hide');
+        }
+    });
+});
+$("input[aria-required='true']").each(function() { 
+   $this = $(this);
+   $('label[for="'+ $this.attr('id') +'"]').append('<span class="mandatory"/>');
+});
+ ]]>
+			</xp:this.value>
+		</xp:scriptBlock>
+	</xe:widgetContainer>
+</xp:view>

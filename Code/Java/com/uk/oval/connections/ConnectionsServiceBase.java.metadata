@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="1.7" replicaid="80257F71005749E7" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="1ee" sequence="67" unid="5197896AB34AEFC880257D94003EA04D">
+<created><datetime>20141118T112402,69+00</datetime></created>
+<modified><datetime>20161214T161050,47+00</datetime></modified>
+<revised><datetime>20161214T161050,46+00</datetime></revised>
+<lastaccessed><datetime>20161214T161050,46+00</datetime></lastaccessed>
+<addedtofile><datetime>20160309T155326,63+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Martin Rolph/O=Oval</name><name>CN=David Mulvey/O=Oval</name></updatedby>
+<wassignedby><name>CN=David Mulvey/O=Oval</name></wassignedby>
+<item name="$Flags"><text>34567Cg~[</text></item>
+
+
+<item name="$TITLE"><text>com/uk/oval/connections/ConnectionsServiceBase.java</text></item>
+
+
+
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+
+<item name="$FileNames" sign="true"><text>com/uk/oval/connections/ConnectionsServiceBase.java</text></item>
+
+</note>

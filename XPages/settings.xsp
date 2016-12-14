@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xp:this.acl>
+		<xp:acl>
+			<xp:this.entries>
+				<xp:aclEntry type="ROLE" right="EDITOR" name="[Admin]"></xp:aclEntry>
+			</xp:this.entries>
+		</xp:acl>
+	</xp:this.acl>
+	<xc:ccLayout pageTitle="Settings">
+		<xc:ccBS_Messages></xc:ccBS_Messages>
+		<xp:button value="Clear Cache" id="button3">
+
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="complete" disableValidators="true">
+				<xp:this.action><![CDATA[#{javascript:settings.clear();
+securesettings.clear();
+@InfoMessage("Settings Cleared");}]]></xp:this.action>
+			</xp:eventHandler>
+		</xp:button>
+
+	</xc:ccLayout>
+</xp:view>

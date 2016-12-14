@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xe:widgetContainer id="widgetContainer1"
+		titleBarText="Public communities">
+		<xp:panel>
+			<xp:dataTable id="dataTable1" rows="5"
+				value="#{javascript:page.conService.getAllCommunities();}" var="comm">
+				<xp:column id="column2">
+					<xp:this.facets>
+						<xp:label value="" id="label2" xp:key="header" />
+					</xp:this.facets>
+					<xp:radio id="radio1"
+						value="#{viewScope.selectedCommunity}" skipContainers="5"
+						groupName="selectedCom" selectedValue="#{comm.communityUuid}">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete">
+						</xp:eventHandler>
+					</xp:radio>
+				</xp:column>
+				<xp:column id="column4">
+					<xp:this.facets>
+						<xp:label value="Community" id="label4" xp:key="header" />
+					</xp:this.facets>
+					<h4>
+						<xp:link escape="true" text="#{javascript:comm.getTitle()}"
+							id="link1" value="#javascript:comm.getCommunityUrl()" title="Open community…" />
+					</h4>
+				</xp:column>
+				<xp:column id="column5">
+					<xp:this.facets>
+						<xp:label value="Creator" id="label5" xp:key="header" />
+					</xp:this.facets>
+					<xp:text escape="true" id="computedField4">
+						<xp:this.value><![CDATA[#{javascript:var d = comm.getContributor().getName();
+return d;
+}]]></xp:this.value>
+						<xp:this.converter>
+							<xp:convertDateTime type="date" dateStyle="short" />
+						</xp:this.converter>
+					</xp:text>
+				</xp:column>
+				<xp:column id="column6">
+					<xp:this.facets>
+						<xp:label value="Type" id="label6" xp:key="header" />
+					</xp:this.facets>
+					<xp:text escape="true" id="computedField5"
+						value="#{javascript:comm.getCommunityType()}">
+						<xp:this.converter>
+							<xp:convertNumber type="number" integerOnly="true" />
+						</xp:this.converter>
+					</xp:text>
+				</xp:column>
+				<xp:column id="column1">
+					<xp:this.facets>
+						<xp:label value="GUID" id="label1" xp:key="header" />
+					</xp:this.facets>
+					<xp:text escape="true" id="computedField1"
+						value="#{javascript:comm.getCommunityUuid()}">
+						<xp:this.converter>
+							<xp:convertNumber type="number" integerOnly="true" />
+						</xp:this.converter>
+					</xp:text>
+				</xp:column>
+			</xp:dataTable>
+			<xp:pager layout="Previous Group Next" partialRefresh="true"
+				id="pager1" for="dataTable1" />
+		</xp:panel>
+	</xe:widgetContainer>
+</xp:view>

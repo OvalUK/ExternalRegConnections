@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xp:panel id="pFindCommunity">
+		<div styleClass="row">
+			<div class="col-md-4" style="padding:0px">
+				<xp:inputText id="inCommunityName" value="#{page.communityNameSearch}">
+					<xp:this.attrs>
+						<xp:attr name="placeholder" value="Search by name">
+						</xp:attr>
+					</xp:this.attrs>
+				</xp:inputText>
+				<xp:message id="message5" for="inCommunityName"
+					styleClass="help-block"></xp:message>
+			</div>
+			<div class="col-md-8">
+				<xp:button value="Search Communities" id="btnFindCommunities">
+
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="complete" action="#{page.findCommunities}" execMode="partial"
+						execId="pFindCommunity">
+					</xp:eventHandler>
+				</xp:button>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<xp:panel>
+					<table class="table">
+						<thead>
+							<tr>
+								<th></th>
+								<th>Name</th>
+								<th>Description</th>
+								<!-- <th>Type</th>-->
+							</tr>
+						</thead>
+						<tbody>
+							<xp:repeat id="lstCommunities" rows="5"
+								value="#{page.communities}" var="comm" disableOutputTag="true">
+								<xp:panel disableOutputTag="true">
+									<xp:this.dataContexts>
+										<xp:dataContext var="isExternal"
+											value="#{javascript:page.isExternal(comm)}">
+										</xp:dataContext>
+									</xp:this.dataContexts>
+									<xp:tr rendered="#{isExternal}">
+										<td>
+											<xp:radio rendered="#{isExternal}" id="radio1"
+												value="#{page.communityGUID}" skipContainers="5" groupName="selectedCom"
+												selectedValue="#{comm.communityUuid}">
+												<xp:eventHandler event="onclick" submit="true"
+													refreshMode="complete" disableValidators="true"></xp:eventHandler>
+											</xp:radio>
+										</td>
+										<td>
+											<xp:link escape="true" text="#{javascript:comm.getTitle()}"
+												id="link2" value="#{comm.communityUrl}" title="Open community…"
+												target="_blank" />
+										</td>
+										<td>
+											<xp:text escape="true" value="#{comm.summary}">
+
+											</xp:text>
+										</td>
+										<!--  
+										<td>
+											<xp:text escape="true"
+												value="#{(isExternal) ? 'external' : comm.communityType}">
+
+											</xp:text>
+										</td>-->
+									</xp:tr>
+								</xp:panel>
+							</xp:repeat>
+						</tbody>
+					</table>
+
+					<xp:pager layout="Previous Group Next" partialRefresh="true"
+						id="pager1" for="lstCommunities" />
+
+				</xp:panel>
+			</div>
+		</div>
+	</xp:panel>
+</xp:view>

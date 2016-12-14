@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="filter" maintenanceversion="1.7" replicaid="80257F71005749E7" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="1de" sequence="5" unid="48F2AB9C1D56144180257D94003AD8B1">
+<created><datetime>20141118T104245,61+00</datetime></created>
+<modified><datetime>20160309T155419,76+00</datetime></modified>
+<revised><datetime>20160309T155419,75+00</datetime></revised>
+<lastaccessed><datetime>20160309T155419,75+00</datetime></lastaccessed>
+<addedtofile><datetime>20160309T155326,55+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Martin Rolph/O=Oval</name><name>CN=David Mulvey/O=Oval</name></updatedby>
+<wassignedby><name>CN=David Mulvey/O=Oval</name></wassignedby>
+<item name="$Flags"><text>h534Q</text></item>
+<item name="$PublicAccess" sign="true"><text>1</text></item>
+
+<item name="$TITLE" sign="true"><text>pleaseWait.js</text></item>
+<item name="$DesignerVersion" sign="true"><text>8.5.3</text></item>
+<item name="$POID"><datetime>20141210T092030,09+00</datetime></item></note>

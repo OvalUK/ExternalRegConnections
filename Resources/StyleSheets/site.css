@@ -1,0 +1,276 @@
+@font-face {
+	font-family: 'Glyphicons Halflings';
+	src: url(/xsp/.ibmxspres/.extlib/bootstrap/bootstrap320/fonts/glyphicons-halflings-regular.eot);
+	src: url(/xsp/.ibmxspres/.extlib/bootstrap/bootstrap320/fonts/glyphicons-halflings-regular.eot?#iefix)
+		format('embedded-opentype'),
+		url(/xsp/.ibmxspres/.extlib/bootstrap/bootstrap320/fonts/glyphicons-halflings-regular.woff) format('woff'),
+		url(/xsp/.ibmxspres/.extlib/bootstrap/bootstrap320/fonts/glyphicons-halflings-regular.ttf) format('truetype'),
+		url(/xsp/.ibmxspres/.extlib/bootstrap/bootstrap320/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular)
+		format('svg');
+}
+
+/* 
+************************ custom  *****************/
+.select2-drop {
+	z-index: 2000;
+}
+
+.select2-search-choice {
+	background-color: #159588;
+}
+
+.select2-results .select2-highlighted {
+	background: #159588 !important;
+	color: #fff;
+}
+
+html {
+	overflow: -moz-scrollbars-vertical;
+	overflow: scroll;
+}
+
+.navbar-static-top {
+	border-radius: 0px !important;
+}
+
+.panel-heading {
+	font-size: 1.1em;
+	background-color: transparent !important;
+	border-bottom: 1px solid #159588 !important;
+	font-weight: bold;
+	padding-bottom: 5px;
+	padding-left: 0px;
+	padding-top: 5px;
+	vertical-align: middle;
+	width: 100%;
+}
+
+.num {
+	text-align: right;
+}
+
+.origApprover {
+	display: block;
+	text-decoration: line-through;
+	font-size: 80%;
+}
+
+.margin-left-x {
+	margin-left: 10px;
+}
+
+.margin-left-off {
+	margin-left: 0px;
+}
+
+.padding-left-off {
+	padding-left: 0px;
+}
+
+@media ( min-width : 768px) {
+	.navbar-static-top {
+		border-radius: 4px;
+	}
+}
+
+.panel .row {
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+/*Forms*/
+.form-horizontal .control-label {
+	padding-top: 0px;
+}
+
+.heading,.panel-title {
+	color: #159588;
+	font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial,
+		sans-serif !important;
+	font-weight: bold;
+	font-size: 1em;
+}
+
+.panel {
+	border-width: 0px
+}
+
+.panel-body {
+	padding-left: 0px
+}
+
+html {
+	-webkit-text-size-adjust: 100%;
+}  /* To stop some auto font resizing on iphone */
+body {
+	margin: 0 auto;
+	max-width: 1200px;
+	background-position: center bottom;
+}
+
+/* Typography */
+.lotusContent,.xspText,.xspTextComputedField,.xspTextLabel,.xspTextViewTitle,.xspTextViewColumn,.xspTextViewColumnComputed,.xspTextViewColumnHeader
+	{
+	font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial,
+		sans-serif !important;
+}
+
+.control-label,label,.xspTextLabel { /*color: #77777a;*/
+	font-size: 1em;
+	font-weight: 700 !important;
+	letter-spacing: -0.5px;
+	text-align: left !important;
+}
+
+.xspInputFieldEditBox {
+	height: 2em;
+}
+
+a:hover,a:focus,a.xspLink:hover,a.xspLink:focus,.xspTextComputedField a:hover
+	{
+	color: #003764;
+	outline: 0;
+}
+
+ul.inlinelist,.inlinelist ul,ol.inlinelist,.inlinelist ol {
+	float: left;
+	margin: 0;
+	padding: 0;
+}
+
+.pull-center {
+	text-align: center;
+}
+
+/* application link styles */
+.applicationLinkContainer {
+	list-style: none;
+	font-size: 14px;
+}
+
+.applicationLinkContainer ul,.applicationLinkContainer li {
+	list-style: none outside none;
+	margin: 0;
+	font-weight: 700;
+}
+
+.applicationLinkContainer li a {
+	display: block;
+}
+
+/* action link styles */
+.actionLinkContainer ul {
+	clear: both;
+	margin: 0 auto;
+	overflow: hidden;
+	text-transform: uppercase;
+}
+
+.actionLinkContainer ul li,.actionLinkContainer ul div {
+	float: left;
+}
+
+.actionLinkContainer a,.actionLinkContainer a:link,.actionLinkContainer a:visited,a.mainActionButton
+	{
+	background: none repeat scroll 0 0 #77777a;
+	border: none;
+	color: #fff !important;
+	cursor: pointer;
+	display: inline-block;
+	font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial,
+		sans-serif !important;
+	font-size: 11px;
+	font-weight: 400;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	margin: 0 5px 5px 0;
+	padding: 5px 10px 6px;
+	text-decoration: none;
+	text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.25);
+}
+
+.actionLinkContainer a:hover,.actionLinkContainer a:active {
+	background: none repeat scroll 0 0 #003764;
+}
+
+.btn:active,.btn.active {
+	background-color: #cccccc \9;
+}
+
+.btn:first-child { *
+	margin-left: 0;
+}
+
+.btn:focus {
+	outline: thin dotted #333;
+	outline: 5px auto -webkit-focus-ring-color;
+	outline-offset: -2px;
+}
+
+.btn.active,.btn:active {
+	background-image: none;
+	outline: 0;
+	-webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, .15), 0 1px 2px
+		rgba(0, 0, 0, .05);
+	-moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, .15), 0 1px 2px
+		rgba(0, 0, 0, .05);
+	box-shadow: inset 0 2px 4px rgba(0, 0, 0, .15), 0 1px 2px
+		rgba(0, 0, 0, .05);
+}
+
+.btn .caret {
+	margin-left: 0;
+	margin-top: 8px;
+}
+
+.xspDataTable {
+	margin: 0px !important;
+}
+
+.xspDataTable tr:hover {
+	background: #f5fafc;
+}
+
+.table {
+	width: 100%;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.table thead>tr>th,.table tbody>tr>th,.table tfoot>tr>th,.table thead>tr>td,.table tbody>tr>td,.table tfoot>tr>td
+	{
+	border-top: 1px solid #ddd;
+	line-height: 1.42857;
+	padding: 8px;
+	vertical-align: top;
+}
+
+.tablehome,.tabledashboard {
+	margin: 5px 0 !important;
+	padding: 0;
+	border-top: 1px solid #ddd;
+}
+
+.table td {
+	vertical-align: middle !important;
+}
+
+.table .img {
+	float: left;
+	height: 30px;
+	margin: 2px 15px 0 0;
+	text-align: center;
+	width: 30px;
+}
+
+table:last-child {
+	margin-top: 0;
+}
+
+.panel {
+	border: 0px solid transparent;
+	-webkit-box-shadow: 0 0 0;
+	box-shadow: 0 0 0;
+	border-radius: 0px;
+}

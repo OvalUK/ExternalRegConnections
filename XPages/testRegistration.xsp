@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xp:this.beforePageLoad><![CDATA[#{javascript:viewScope.put("page", new com.uk.oval.registrations.ui.TestRegistrations());}]]></xp:this.beforePageLoad>
+	<xc:ccLayout pageTitle="Registration Tests">
+		<xc:ccBS_Messages></xc:ccBS_Messages>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Test</th>
+					<th>Results</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Registration DB</td>
+					<td>
+						<xp:text value="#{settings.database_externaldirectory.value1}" />
+					</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>Password Validation Regular Expression</td>
+					<td>
+						<xp:text value="#{settings.validation_password.value2}" />
+					</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>Password Validation Error Message</td>
+					<td>
+						<xp:text value="#{settings.validation_password.value1}" />
+					</td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+		<xe:widgetContainer titleBarText="Register Person">
+			<xc:ccRegisterPerson showCommunities="true"
+				editablePassword="true"></xc:ccRegisterPerson>
+		</xe:widgetContainer>
+		<xe:widgetContainer titleBarText="Reset Password">
+			<xc:ccResetPassword editableEmail="true"></xc:ccResetPassword>
+		</xe:widgetContainer>
+		<xe:widgetContainer titleBarText="Reset Password Request">
+			<xc:ccRequestResetPassword></xc:ccRequestResetPassword>
+		</xe:widgetContainer>
+		<xe:widgetContainer titleBarText="Get Request">
+			<xc:ccGetRequest></xc:ccGetRequest>
+		</xe:widgetContainer>
+		</xc:ccLayout>
+</xp:view>

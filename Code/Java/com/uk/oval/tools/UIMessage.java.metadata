@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="1.7" replicaid="80257F71005749E7" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="20e" sequence="44" unid="B32C84B55038A1F180257D950037399D">
+<created><datetime>20141119T100312,29+00</datetime></created>
+<modified><datetime>20160309T155419,48+00</datetime></modified>
+<revised><datetime>20160309T155419,47+00</datetime></revised>
+<lastaccessed><datetime>20160309T155419,47+00</datetime></lastaccessed>
+<addedtofile><datetime>20160309T155326,79+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Martin Rolph/O=Oval</name><name>CN=David Mulvey/O=Oval</name></updatedby>
+<wassignedby><name>CN=David Mulvey/O=Oval</name></wassignedby>
+<item name="$Flags"><text>34567Cg~[</text></item>
+<item name="$TITLE"><text>com/uk/oval/tools/UIMessage.java</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+
+<item name="$FileNames" sign="true"><text>com/uk/oval/tools/UIMessage.java</text></item>
+
+
+
+
+</note>

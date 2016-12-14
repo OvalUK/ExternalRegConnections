@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+
+	<xp:this.dataContexts>
+		<xp:dataContext var="parentPanel" value="${compositeData.parentPanel}">
+		</xp:dataContext>
+		<xp:dataContext var="doc" value="#{javascript:compositeData.doc}">
+		</xp:dataContext>
+	</xp:this.dataContexts>
+
+	<xp:this.resources>
+		<xp:script src="/xpCommon.jss" clientSide="false"></xp:script>
+	</xp:this.resources>
+
+	<xp:messages id="messages1" styleClass="alert alert-danger"
+		loaded="${empty compositeData.hideErrors || compositeData.hideErrors == false}">
+	</xp:messages>
+	<div class="form-horizontal" style="padding: 10px">
+		<div class="form-actions pull-right" style="margin:10px 0 10px 0">
+
+
+
+			<xp:button id="button4" styleClass="btn btn-primary"
+				rendered="#{javascript:doc.isEditable()}"
+				loaded="${empty compositeData.hideSave || compositeData.hideSave == false}">
+				<xp:this.value><![CDATA[${(empty compositeData.btnSaveLabel) ? " Save" : compositeData.btnSaveLabel}]]></xp:this.value>
+				<i class="icon-ok icon-white" />
+				<!--
+					refreshId="${compositeData.parentPanel}"
+					execId="${compositeData.parentPanel}"
+				-->
+				<xp:eventHandler event="onclick" submit="true">
+					<xp:this.action>
+
+						<xp:actionGroup>
+							<xp:saveDocument var="#{compositeData.docVar}">
+							</xp:saveDocument>
+
+
+
+							<xp:executeScript>
+								<xp:this.script><![CDATA[#{javascript:if (compositeData.navRuleSave) {
+ return compositeData.navRuleSave;
+} else {
+return "save";
+}}]]></xp:this.script>
+							</xp:executeScript>
+						</xp:actionGroup>
+					</xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			
+			<xp:callback facetName="formButtons"></xp:callback>
+			
+			<xp:button rendered="#{javascript:(doc.isEditable())}"
+				styleClass="btn" value="Cancel" id="button2">
+
+
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="partial" refreshId="${compositeData.parentPanel}"
+					immediate="true" execMode="partial" execId="${compositeData.parentPanel}">
+					<xp:this.action>
+
+						<xp:actionGroup>
+							<xp:actionGroup condition="#{javascript:!doc.isNewNote()}">
+								<xp:changeDocumentMode mode="readOnly"
+									var="doc">
+								</xp:changeDocumentMode>
+							</xp:actionGroup>
+
+							<xp:actionGroup condition="#{javascript:doc.isNewNote()}">
+
+
+								<xp:executeScript>
+									<xp:this.script><![CDATA[#{javascript:if (compositeData.navRuleCancel) {
+ return compositeData.navRuleCancel;
+} else {
+return "cancel";
+}}]]></xp:this.script>
+								</xp:executeScript>
+							</xp:actionGroup>
+						</xp:actionGroup>
+					</xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+
+			<xp:button styleClass="btn" value="Edit" id="button3">
+				<xp:this.rendered><![CDATA[#{javascript:(fnCanEdit(doc) && (compositeData.hideEdit == null || compositeData.hideEdit == false)) }]]></xp:this.rendered>
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="partial" refreshId="${parentPanel}">
+					<xp:this.action>
+						<xp:changeDocumentMode mode="edit" var="doc">
+						</xp:changeDocumentMode>
+					</xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			<div class="clearfix"></div>
+		</div>
+		<div class="clearfix"></div>
+		<xp:text id="title" escape="true" value="#{compositeData.title}"
+			rendered="#{!empty compositeData.title}" tagName="legend">
+		</xp:text>
+
+
+		<xp:callback id="callback1"></xp:callback>
+
+	</div>
+	<xp:scriptBlock type="text/javascript">
+		<xp:this.value>
+			<![CDATA[
+			$( "input[aria-invalid='true']" ).closest('div.form-group').addClass('has-error');
+			$(':not(#anything)').on('click', function (e) {
+    $('.popover-link').each(function () {
+        //the 'is' for buttons that trigger popups
+        //the 'has' for icons within a button that triggers a popup
+        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+            $(this).popover('hide');
+        }
+    });
+});
+$("input[aria-required='true']").each(function() { 
+   $this = $(this);
+   $('label[for="'+ $this.attr('id') +'"]').append('<span class="mandatory"/>');
+});
+ ]]>
+		</xp:this.value>
+	</xp:scriptBlock>
+	<script type="text/javascript">
+		$(function () {
+		$("[data-toggle='tooltip']").tooltip({"html":true});
+		$("[data-toggle='popover']").popover({"html":true,"trigger":"click"});
+		});
+	</script>
+
+
+</xp:view>

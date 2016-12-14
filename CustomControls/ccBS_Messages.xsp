@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<div class="row">
+	
+	<div id="alert_placeholder"></div>
+	
+
+	<xp:div rendered="#{javascript:facesContext.getMessages(null).hasNext()}">
+
+		<xp:this.styleClass><![CDATA[#{javascript:var msg:javax.faces.application.FacesMessage = facesContext.getMessages(null).next();
+var sev = msg.getSeverity();
+
+var alertTypeClass = "";
+
+if ( sev == javax.faces.application.FacesMessage.SEVERITY_INFO ) {
+	alertTypeClass ="alert-info";
+} else if ( sev == javax.faces.application.FacesMessage.SEVERITY_WARN ) {
+	alertTypeClass ="alert-warning";
+} else if ( sev == javax.faces.application.FacesMessage.SEVERITY_ERROR ) {
+	alertTypeClass ="alert-danger";
+}
+
+"alert fade in " + alertTypeClass}]]></xp:this.styleClass>
+
+		<a class="close" data-dismiss="alert" href="#">&#215;</a>
+
+		<xp:repeat id="repeat1" rows="30" var="message" disableOutputTag="true">
+
+			<xp:this.value><![CDATA[#{javascript:var it = facesContext.getMessages(null);
+
+var m = new java.util.Vector();
+
+while(it.hasNext()) {
+m.add(it.next());
+}
+
+return m;
+}]]></xp:this.value>
+			<xp:text escape="false" id="computedField1" value="#{message.summary}"></xp:text><br />
+		</xp:repeat>
+
+
+	</xp:div>
+</div>
+</xp:view>

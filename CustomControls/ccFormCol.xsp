@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+
+	<xp:div>
+		<xp:this.styleClass><![CDATA[#{javascript:var col; 
+if (compositeData.cols2 != null) {
+	col = "col-sm-12 col-md-"+(compositeData.cols2);
+} else if (!compositeData.cols) {
+col= "col-sm-12 col-md-4";
+} else if (compositeData.cols == 2) {
+col= "col-sm-12 col-md-4";
+} else {
+col= "col-sm-2";
+}
+"control-label " + col}]]></xp:this.styleClass>
+		<xp:text tagName="label" value="${compositeData.label}"
+			rendered="${!empty compositeData.label}" styleClass="control-label">
+
+			<xp:this.attrs>
+				<xp:attr name="for"
+					value="#{javascript:getClientId(compositeData.labelFor)}" loaded="${!empty compositeData.labelFor}">
+				</xp:attr>
+			</xp:this.attrs>
+		</xp:text>
+		<xp:text styleClass="mandatory" loaded="${compositeData.mandatory == true}" />
+		<xp:panel tagName="small" loaded="${!empty compositeData.helpText}">
+			<br />
+			<xp:text value="${compositeData.helpText}" escape="false" />
+		</xp:panel>
+		<xp:link escape="true" styleClass="control-label popover-link"
+			rendered="${!empty compositeData.helpKey and !empty settings[compositeData.helpKey]}"
+			style="height:20px;width:10px" id="link1">
+
+			<xp:this.attrs>
+				<xp:attr name="data-toggle" value="popover"></xp:attr>
+				<xp:attr name="data-content" value="${settings[compositeData.helpKey].valueRT}">
+				</xp:attr>
+				<xp:attr name="data-original-title">
+					<xp:this.value>
+						${compositeData.label}<![CDATA[
+						<a style="z-index:10" class="close pull-right"
+							aria-hidden="true" type="button" data-dismiss="popover" onclick="$('.popover-link').popover('hide')">
+							×
+						</a>]]>
+					</xp:this.value>
+				</xp:attr>
+			</xp:this.attrs>
+
+			<span class="glyphicon glyphicon-question-sign"
+				style="color:#888888;padding-left:4px;position:relative:top:2px">
+			</span>
+
+			<xp:eventHandler event="onclick" submit="false">
+				<xp:this.script><![CDATA[return false;]]></xp:this.script>
+			</xp:eventHandler>
+		</xp:link>
+		<xp:callback facetName="label"></xp:callback>
+	</xp:div>
+
+	<xp:div>
+		<xp:this.styleClass><![CDATA[#{javascript:
+
+
+if (compositeData.cols2 != null) {
+	return "col-sm-12 col-md-"+(12-compositeData.cols2);
+};
+if (!compositeData.cols) {
+return "col-sm-12 col-md-8";
+} if (compositeData.cols == 2) {
+return "col-sm-12 col-md-8";
+} else if(compositeData.span) {
+return "col-sm-10";
+} else {
+return "col-sm-4";
+}}]]></xp:this.styleClass>
+		<xp:callback></xp:callback>
+	</xp:div>
+</xp:view>
